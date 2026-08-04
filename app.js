@@ -92,7 +92,7 @@ function stopScroll() {
   isScrolling = false;
   cancelAnimationFrame(animationFrameId);
   startBtn.classList.remove('active'); // Resets gradient back to initial state
-  startBtn.textContent = 'Start / Pause (Space)';
+  startBtn.textContent = 'Start (Space)';
 }
 
 // Listeners
