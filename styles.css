@@ -31,7 +31,6 @@ html, body {
 body {
   background: var(--bg-dark);
   color: var(--text-main);
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,18 +41,17 @@ body {
 
 .container {
   height: 100dvh;
-  flex: 1;
   width: 100%;
   max-width: 900px;
-  padding: 30px 24px 1rem 24px;
+  padding: 32px 20px 16px 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px; /* Uniform vertical spacing across all elements */
   box-sizing: border-box;
 }
 
 /* Header & Titles */
- h1 {
+h1 {
   font-size: 1.8rem;
   font-weight: 200;
   letter-spacing: 2px;
@@ -62,12 +60,80 @@ body {
   -webkit-text-fill-color: transparent;
   text-shadow: var(--shadow-glow);
   text-align: center;
-  /* margin: 12px; */
+}
+
+/* Control Buttons Row */
+.controls-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 420px; /* Constrains width so buttons stay neatly centered */
+  margin: 0 auto;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 14px; /* Reduced vertical padding */
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.controls-row button {
+  flex: 1; /* Ensures equal width and layout stability */
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 240, 255, 0.4);
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+  color: #0b0f19;
+}
+
+#editBtn {
+  background: linear-gradient(135deg, var(--accent-blue), #0040b3);
+  color: #ffffff;
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  box-shadow: 0 3px 10px rgba(0, 102, 255, 0.25);
+}
+
+#startBtn {
+  background: linear-gradient(135deg, #00d2ff, var(--accent-cyan));
+  color: #0b0f19; /* High contrast dark text */
+  font-weight: 700;
+  box-shadow: 0 3px 10px rgba(0, 240, 255, 0.3);
+}
+
+#startBtn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+}
+
+/* Speed Control Row */
+#speedControl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+input[type="range"] {
+  accent-color: var(--accent-cyan);
+  cursor: pointer;
+  width: 160px;
 }
 
 /* Metrics Bar - Frosted Glass Styling */
 #metricsBar {
-  /* margin-bottom: 12px; */
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -75,16 +141,19 @@ body {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-light);
-  border-radius: 12px;
-  padding: 4px 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  padding: 4px 16px; /* Slimmed vertical height */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .metric-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
 }
 
 .metric-label {
@@ -95,25 +164,34 @@ body {
 }
 
 .metric-value {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 600;
   color: var(--accent-cyan);
 }
 
-/* Script Input Area */
-#scriptInput {
-  box-sizing: border-box;
-  max-width: 100%;
+/* Dynamic Flex Box for Text Area & Prompter */
+#scriptInput,
+#prompterContainer {
+  flex: 1; /* Expands to fill all remaining vertical space */
   width: 100%;
-  min-height: 320px;
-  background: var(--panel-bg);
+  max-width: 100%;
+  box-sizing: border-box;
+  background: rgba(5, 8, 15, 0.95);
   border: 1px solid var(--border-light);
   border-radius: 12px;
-  color: var(--text-main);
   padding: 20px;
-  font-size: 1.2rem;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+}
+
+#scriptInput {
+  background: var(--panel-bg);
+  color: var(--text-main);
+  font-size: 1.1rem;
   line-height: 1.6;
-  resize: vertical;
+  resize: none; /* Disables manual resize handle to prevent layout breaking */
   outline: none;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -123,74 +201,11 @@ body {
   box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
 }
 
-/* Prompter Scrolling Container */
-#prompterContainer {
-  width: 100%;
-  height: 500px;
-  background: rgba(5, 8, 15, 0.95);
-  border: 1px solid var(--border-light);
-  border-radius: 12px;
-  padding: 20px;
-  overflow-y: auto;
-  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
-}
-
 #prompterText {
   font-size: 1.5rem;
   line-height: 1.8;
   color: #ffffff;
   font-weight: 500;
-}
-
-/* Control Buttons & Inputs */
-.controls-row {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-button {
-  cursor: pointer;
-  background: linear-gradient(135deg, var(--accent-blue), #0040b3);
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 24px;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
-}
-
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 240, 255, 0.4);
-  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
-  color: #0b0f19;
-}
-
-#startBtn {
-  background: linear-gradient(135deg, var(--accent-gold), #00e00b);
-  color: #0b0f19;
-  box-shadow: 0 4px 15px rgba(255, 183, 3, 0.3);
-}
-
-#startBtn:hover {
-  background: linear-gradient(135deg, #3aff3a, var(--accent-gold));
-  box-shadow: 0 6px 20px rgba(255, 183, 3, 0.5);
-  color: #0b0f19;
-}
-
-#speedControl {
-  margin-top: 8px;
-}
-/* Custom Range Slider */
-input[type="range"] {
-  accent-color: var(--accent-cyan);
-  cursor: pointer;
 }
 
 /* Hidden Utility */
@@ -201,8 +216,7 @@ input[type="range"] {
 /* Footer Accent */
 footer {
   text-align: center;
-  /* padding: 20px 0; */
-  margin-top: auto;
+  padding-bottom: 8px;
   color: var(--text-muted);
   font-size: 0.8rem;
   letter-spacing: 0.5px;
