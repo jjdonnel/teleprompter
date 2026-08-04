@@ -1,0 +1,136 @@
+    :root {
+      --bg-color: #121212;
+      --panel-color: #1e1e1e;
+      --text-color: #e0e0e0;
+      --accent-color: #3b82f6;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 1.25rem;
+      margin: 0 0 15px 0;
+      color: #9ca3af;
+    }
+
+    .controls {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      background: var(--panel-color);
+      padding: 12px 20px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    input[type="range"] {
+      cursor: pointer;
+    }
+
+    /* Input area */
+    #scriptInput {
+      flex: 1;
+      width: 100%;
+      background: var(--panel-color);
+      color: var(--text-color);
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 15px;
+      font-size: 1rem;
+      resize: none;
+      box-sizing: border-box;
+    }
+
+    /* Prompter reading display */
+    #prompterContainer {
+      flex: 1;
+      background: var(--panel-color);
+      border: 1px solid #333;
+      border-radius: 8px;
+      overflow-y: scroll;
+      position: relative;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+
+    #prompterText {
+      font-size: 2.5rem;
+      line-height: 1.6;
+      max-width: 900px;
+      margin: 0 auto;
+      padding-bottom: 50vh;
+      /* Leaves room to scroll past the end */
+    }
+
+    #metricsBar {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 12px;
+      padding: 6px 12px;
+      margin-bottom: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
+      color: #9ca3af;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    #metricsBar .divider {
+      color: #4b5563;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Reading guide guideline overlay */
+    .guideline {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: rgba(239, 68, 68, 0.4);
+      pointer-events: none;
+    }
+
+    /* Add to your <style> tag */
+    #speedControl {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+    }
+
+    #speedSlider {
+      width: 95px;
+      /* Adjust width as needed */
+      cursor: pointer;
+    }

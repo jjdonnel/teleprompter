@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VO Studio Teleprompter</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <h1>VO Studio Teleprompter</h1>
+
+  <div class="controls">
+    <button id="toggleViewBtn">Load / Edit Script</button>
+    <button id="startBtn" class="hidden">Start / Pause (Space)</button>
+    <div id="speedControl" class="hidden">
+      <label>Speed:</label>
+      <input type="range" id="speedSlider" min="0.5" max="5" step="0.5" value="1.5">
+    </div>
+  </div>
+
+  <!-- Dedicated Metrics Bar -->
+  <div id="metricsBar">
+    <span id="wordCountDisplay">0 Words</span>
+    <span class="divider">•</span>
+    <span id="wpmDisplay">~0 WPM</span>
+  </div>
+
+  <!-- Input Mode -->
+  <textarea id="scriptInput" placeholder="Paste your script here..."></textarea>
+
+  <!-- Reading Display Mode -->
+  <div id="prompterContainer" class="hidden">
+    <div class="guideline"></div>
+    <div id="prompterText"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
